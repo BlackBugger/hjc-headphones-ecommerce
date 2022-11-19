@@ -11,7 +11,7 @@ const Home = () => {
     const [ban, setBan] = useState([]);
     const { product } = useSelector((state) => state.product)
 
-  
+ 
     useEffect(() => {
  
       client

@@ -11,11 +11,12 @@ import { loadStripe } from '@stripe/stripe-js';
 import axios from 'axios'
 
 const Cart = () => {
+
   const dispatch = useDispatch();
   const cartRef = useRef();
   const { cartItems, cartTotalQuantity, cartTotalPrice } = useSelector((state) => state.cart)
 
-  const stripePromise = loadStripe('pk_test_51M4etQBQYsUE3NdCXnkjuq2yaFMcIemOLIKHcu7pGap0W0VXFmBFzrxg46RueNv7PTHEqXSgi8zlUjM6skhvW8jE00AkcPzc4V');
+  const stripePromise = loadStripe(process.env.REACT_APP_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
 
   const handleDecrement = (quantity) => {
