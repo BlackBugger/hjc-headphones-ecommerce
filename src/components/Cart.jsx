@@ -25,7 +25,7 @@ const Cart = () => {
   }
 
   const api = axios.create({
-    baseURL: "http://localhost:4242",
+    baseURL: "https://cruz-ecommerce.herokuapp.com/",
     Accept: "application/json",
   });
 
