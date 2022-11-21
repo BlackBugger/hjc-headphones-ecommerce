@@ -1,7 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { createSlice, current } from '@reduxjs/toolkit';
-import Product from '../components/Product';
-import { useSelector, useDispatch } from 'react-redux';
+import { createSlice} from '@reduxjs/toolkit';
 
 export const cartSlice = createSlice({
   name: 'cart',
@@ -23,7 +21,7 @@ export const cartSlice = createSlice({
         state.cartTotalQuantity += state.qty;
       } else {
         const tempProduct = { ...action.payload, cartQuantity: state.qty };
-        const { price, cartQuantity } = state.cartItems;
+     
         state.cartItems.push(tempProduct);
         state.cartTotalPrice += action.payload.price * state.qty;
         state.cartTotalQuantity += state.qty;

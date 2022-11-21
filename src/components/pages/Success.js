@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import {BsBagCheckFill} from 'react-icons/bs'
 import { useDispatch } from "react-redux";
-import {setCartItems, setCartTotalPrice, setCartTotalQuantity  } from '../../redux/cartSlice'
+import {setCartTotalPrice} from '../../redux/cartSlice'
 import { runFireworks } from '../Layout/confetti';
 
 const Success = () => {

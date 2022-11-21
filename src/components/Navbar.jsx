@@ -4,7 +4,6 @@ import { AiOutlineShopping } from 'react-icons/ai'
 import Cart from './Cart';
 import { useSelector, useDispatch } from "react-redux";
 import { setShowCart } from '../redux/reducers';
-import { setQty } from '../redux/cartSlice';
 
 const Navbar = () => {
   const { cartTotalQuantity } = useSelector((state) => state.cart);
