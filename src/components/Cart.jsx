@@ -25,7 +25,7 @@ const Cart = () => {
   }
 
   const api = axios.create({
-    baseURL: "http://localhost:4242",
+    baseURL: "https://ecommerce-stripe-production.up.railway.app",
     Accept: "application/json",
   });
 
