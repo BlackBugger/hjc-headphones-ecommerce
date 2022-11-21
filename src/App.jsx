@@ -19,7 +19,7 @@ function App() {
       .then((data) => dispatch(setProduct(data)))
       .catch(console.error);
       
-// eslint-disable-next-line react-hooks/exhaustive-deps
+//eslint-disable-next-line
   }, []);
 
   return (
