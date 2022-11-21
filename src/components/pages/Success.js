@@ -16,6 +16,8 @@ dispatch(setCartTotalPrice(0))
 
 
 runFireworks();
+
+// eslint-disable-next-line react-hooks/exhaustive-deps
 }, []);
 
   return (

@@ -18,7 +18,8 @@ function App() {
       .fetch(`*[_type == "product"]`)
       .then((data) => dispatch(setProduct(data)))
       .catch(console.error);
-
+      
+// eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
