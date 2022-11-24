@@ -11,7 +11,6 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const { showCart } = useSelector((state) => state.product);
   const { user } = useSelector((state) => state.product);
-const navigate = useNavigate();
 
 const handleAuth =() => {
   if(user){
