@@ -12,13 +12,13 @@ const Navbar = () => {
   const { showCart } = useSelector((state) => state.product);
   const { user } = useSelector((state) => state.product);
 
-const handleAuth =() => {
-  if(user){
-    auth.signOut();
+  const handleAuth = () => {
+    if (user) {
+      auth.signOut();
+    }
   }
-}
 
-console.log(user);
+  console.log(user);
   return (
     <div className='navbar-container'>
       <p className='logo'>
@@ -27,7 +27,7 @@ console.log(user);
       <div className='actions'>
         <span>Hello, {user?.email}</span>
         <Link to={!user && '/login'}>
-        <button type='button' className='login' onClick={handleAuth}>{user ? 'SIGN OUT' : 'LOGIN'}</button>
+          <button type='button' className='login' onClick={handleAuth}>{user ? 'SIGN OUT' : 'LOGIN'}</button>
         </Link>
         <button type='button' className='cart-icon' onClick={() => dispatch(setShowCart(true))}>
           <AiOutlineShopping />
