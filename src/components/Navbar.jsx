@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { AiOutlineShopping } from 'react-icons/ai'
 import Cart from './Cart';
 import { useSelector, useDispatch } from "react-redux";
