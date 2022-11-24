@@ -19,13 +19,9 @@ function App() {
 
   useEffect(() => {
     client
-      .fetch(`*[_type == "product"]`,
-        {
-          mode: 'cors',
-          headers: {
-            'Access-Control-Allow-Origin': '*'
-          }
-        }).then((data) => dispatch(setProduct(data))).catch(console.error);
+      .fetch(`*[_type == "product"]`)
+      .then((data) => dispatch(setProduct(data)))
+      .catch(console.error);
 
     //eslint-disable-next-line
   }, []);
@@ -40,10 +36,10 @@ function App() {
         dispatch(setUser(null))
       }
       console.log(user);
-
+    
     })
 
-    //eslint-disable-next-line
+     //eslint-disable-next-line
   }, []);
 
   return (
