@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 import { urlFor } from '../client'
-import CurrencyFormat from 'react-currency-format';
+// import CurrencyFormat from 'react-currency-format';
 const Order = ({ order }) => {
     return (
         <div className='order'>
@@ -24,7 +24,7 @@ const Order = ({ order }) => {
                     </div>
                 </>
             ))}
-            <CurrencyFormat
+            {/* <CurrencyFormat
             renderText={(value) => (
                 <h3>Total: {value}</h3>
             )}
@@ -33,7 +33,7 @@ const Order = ({ order }) => {
             displayType={'text'}
             thousandSeparator={true}
             prefix={"P"}
-            />
+            /> */}
 
 
 
