@@ -1,4 +1,5 @@
-
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-useless-escape */
 
 import React, { useEffect, useState } from 'react'
 import Modal from 'react-bootstrap/Modal';
