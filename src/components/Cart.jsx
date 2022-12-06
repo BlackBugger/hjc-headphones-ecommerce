@@ -55,16 +55,16 @@ const Cart = () => {
     if (response.statusCode === 500) return;
     toast.loading('Redirecting..')
 
-    db
-      .collection('users')
-      .doc(user?.uid)
-      .collection('orders')
-      .doc(data.id)
-      .set({
-        cart: cartItems,
-        amount: data.amount_total,
-        created: data.created
-      })
+    // db
+    //   .collection('users')
+    //   .doc(user?.uid)
+    //   .collection('orders')
+    //   .doc(data.id)
+    //   .set({
+    //     cart: cartItems,
+    //     amount: data.amount_total,
+    //     created: data.created
+    //   })
 
     dispatch(EnableSuccessURL(true));
    
@@ -80,7 +80,7 @@ const Cart = () => {
     <div className='cart-wrapper' ref={cartRef}>
       <div className='cart-container'>
         <button type='button' className='cart-heading' onClick={() => dispatch(setShowCart(false))}>
-          <AiOutlineLeft />
+          <AiOutlineLeft color='white' />
           <span>Your Cart</span>
           <span className='cart-num-items'>({cartTotalQuantity} items)</span>
         </button>

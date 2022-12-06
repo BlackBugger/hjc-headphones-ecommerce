@@ -18,7 +18,8 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* background-color: #151718; */
+  
+  background-color: #151718;
 }
 
 a {
@@ -28,26 +29,43 @@ a {
 
 .main-container {
   max-width: 1400px;
-  margin: auto;
+
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+
 }
 
 .layout {
   padding: 10px;
+  padding-top: 0;
 
 }
 
 .navbar-container {
+  position: fixed;
+  height: 40px;
+  top:0;
+  left: 0;
   display: flex;
+justify-content: center;
+min-width: 100%;
+z-index: 100;
 
+background-color: #232627;
+box-shadow: 1px 5px 20px 3px rgb(0 0 0 / 30%);
+}
+.main-nav{
+  display: flex;
   justify-content: space-between;
   margin-top: 6px;
-  align-items: center;
-  position: relative;
-  min-width: 100%;
+  padding-inline: 100px;
+min-width: 100%;
+
+text-align: center;
+  padding: 0 50px;
+  
 }
 
 .marquee-text {
@@ -240,7 +258,9 @@ span.text-red {
   color: #fff;
   cursor: pointer;
 }
-
+.order{
+  color: #dcdcdc;
+}
 .order-btn {
   color: gray;
   background: none;
@@ -438,13 +458,14 @@ button.ghost:hover {
   gap: 15px;
   margin-top: 20px;
   width: 100%;
+
 }
 
 .product-card {
   cursor: pointer;
   transform: scale(1, 1);
   transition: transform 0.5s ease;
-  color: #324d67;
+  color: #d3cfc9;
 
 }
 
@@ -454,7 +475,7 @@ button.ghost:hover {
 
 .product-image {
   border-radius: 15px;
-  background-color: #ebebeb;
+  background-color: #202325;
   transform: scale(1, 1);
   transition: transform 0.5s ease;
 }
@@ -466,22 +487,23 @@ button.ghost:hover {
 .product-price {
   font-weight: 800;
   margin-top: 6px;
-  color: black;
+  color: #e2e2e2;
 }
 
 .hero-banner-container {
   padding: 50px 40px;
-  background-color: #dcdcdc;
+  background-color: #292d2f;
   border-radius: 15px;
   position: relative;
   height: 100%;
   line-height: 0.9;
   width: 100%;
-
+  margin-top: 100px;
 }
 
 .hero-banner-container .beats-solo {
   font-size: 20px;
+  color: #D3cfc9;
 }
 
 .hero-banner-container button {
@@ -500,6 +522,7 @@ button.ghost:hover {
 .hero-banner-container h3 {
   font-size: 4rem;
   margin-top: 4px;
+  color: #D3cfc9;
 }
 
 .hero-banner-container h1 {
@@ -527,7 +550,7 @@ button.ghost:hover {
 }
 
 .desc p {
-  color: #5f5f5f;
+  color: #d3cfc9;
   font-weight: 100;
 
 }
@@ -543,7 +566,7 @@ button.ghost:hover {
 .products-heading {
   text-align: center;
   margin: 40px 0px;
-  color: #324d67;
+  color: #D3cfc9;
 
 }
 
@@ -637,11 +660,11 @@ button.ghost:hover {
 .cart-container {
   height: 100vh;
   width: 600px;
-  background-color: white;
+  background-color: #202325;
   float: right;
   padding: 40px 10px;
   position: relative;
-
+color: white;
 }
 
 .footer-container {
@@ -679,6 +702,9 @@ button.ghost:hover {
 .cart-heading .heading {
   margin-left: 10px;
 }
+.cart-heading span:nth-child(2) {
+  color: #d3cfc9;
+}
 
 .cart-num-items {
   margin-left: 10px;
@@ -694,6 +720,7 @@ button.ghost:hover {
   font-weight: 600;
   font-size: 20px;
 }
+
 
 .cancel {
   cursor: pointer;
@@ -716,14 +743,14 @@ button.ghost:hover {
   width: 180px;
   height: 150px;
   border-radius: 15px;
-  background-color: #ebebeb;
+  background-color: #202325;
 }
 
 .item-desc .flex {
   display: flex;
   justify-content: space-between;
   width: 350px;
-  color: #324d67;
+  color: white;
 
 }
 
@@ -785,11 +812,13 @@ button.ghost:hover {
   color: #fff;
   cursor: pointer;
   transform: scale(1, 1);
-  transition: transform 0.5s ease;
+  transition: transform 0.5s ease, color 0.5s ease,background-color 0.5s ease;
 }
 
 .btn:hover {
   transform: scale(1.1, 1.1);
+  color: #fff;
+  background-color: #cc252b;
 }
 
 .product-detail-container {
@@ -797,7 +826,7 @@ button.ghost:hover {
   gap: 40px;
   margin: 40px;
   margin-top: 60px;
-  color: #324d67;
+  color: #d3cfc9;
 
 }
 
@@ -812,7 +841,7 @@ button.ghost:hover {
 }
 
 .product-detail-image:hover {
-  background-color: #f02d34;
+  background-color: #cc252b;
 
 }
 
@@ -846,13 +875,9 @@ button.ghost:hover {
   margin-top: 10px;
 }
 
-.product-detail-desc p {
-  margin-top: 10px;
-}
-
 .reviews p {
-  color: #324d67;
-  margin-top: 0px;
+  color: #d3d3d3;
+  margin-top: 18px;
 }
 
 .product-detail-desc .price {
@@ -951,7 +976,7 @@ button.ghost:hover {
 .maylike-products-wrapper h2 {
   text-align: center;
   margin: 50px;
-  color: #324d67;
+  color: #d3cfc9;
 
   font-size: 28px;
 }
