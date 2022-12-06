@@ -4,7 +4,7 @@ export const ecommerceSlice = createSlice({
   name: 'ecommerce',
   initialState: {
     product: [],
-    user: null,
+   
     showCart: false,
   },
   reducers: {
@@ -14,14 +14,12 @@ export const ecommerceSlice = createSlice({
     setShowCart: (state, action) => {
       state.showCart = action.payload;
     },
-    setUser: (state, action) => {
-      state.user = action.payload;
-    },
+
     
   },
 });
 
-export const {setProduct,setShowCart,setUser} =
+export const {setProduct,setShowCart} =
   ecommerceSlice.actions;
 
 export default ecommerceSlice.reducer;

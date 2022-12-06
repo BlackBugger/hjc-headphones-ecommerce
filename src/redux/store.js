@@ -1,10 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-import reducer from './reducers';
-import cartSlice from './cartSlice';
-
+import productReducer from './productReducer';
+import cartReducer from './cartReducer';
+import forgotPasswordReducer from './forgotPasswordReducer'
+import successReducer from './successReducer';
 export const store = configureStore({
   reducer: {
-    product:reducer,
-    cart:cartSlice,
+    product:productReducer,
+    cart:cartReducer,
+    showForgotPassword: forgotPasswordReducer,
+    successURL: successReducer
   },
 });

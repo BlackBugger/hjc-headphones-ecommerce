@@ -12,13 +12,15 @@ body,
 ::-webkit-scrollbar {
   width: 0px;
 }
-body{
+
+body {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   /* background-color: #151718; */
 }
+
 a {
   color: inherit;
   text-decoration: none;
@@ -29,21 +31,23 @@ a {
   margin: auto;
   width: 100%;
   display: flex;
-align-items: center;
-justify-content: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .layout {
   padding: 10px;
-  
+
 }
 
 .navbar-container {
   display: flex;
+
   justify-content: space-between;
-  margin: 6px 18px;
+  margin-top: 6px;
+  align-items: center;
   position: relative;
-  min-width: 1400px;
+  min-width: 100%;
 }
 
 .marquee-text {
@@ -97,6 +101,8 @@ span.text-red {
 
   display: flex;
   gap: 10px;
+  margin: 0;
+
 }
 
 .icons {
@@ -104,11 +110,23 @@ span.text-red {
   font-size: 30px;
   border-radius: 50%;
   padding: 5px;
+  transition: transform 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+.icons:hover {
+  transform: scale(1.1, 1.1);
+  color: blue;
+}
+
+.icons:nth-child(2):hover {
+  transform: scale(1.1, 1.1);
+  color: red;
 }
 
 .actions {
   display: flex;
-  gap: 1rem;
+  gap: 1em;
   color: gray;
   justify-content: center;
   align-items: center;
@@ -119,6 +137,7 @@ span.text-red {
   left: 0;
   width: 50%;
   z-index: 2;
+  opacity: 1;
 }
 
 .sign-up-container {
@@ -127,8 +146,6 @@ span.text-red {
   z-index: 1;
   opacity: 0;
 }
-
-
 
 .overlay-container {
   position: absolute;
@@ -150,70 +167,88 @@ span.text-red {
   height: 100%;
   width: 200%;
   transform: translateX(0);
-  transition: transform 0.6s ease-in-out;
+  transition: transform .6s ease-in-out;
 }
-.overlay-panel{
-  position:absolute;
-  top:0;
+
+.overlay-panel {
+  position: absolute;
+  top: 0;
   display: flex;
   flex-direction: column;
-justify-content: center;
-align-items: center;
-gap: 0.5rem;
-padding: 0 40px;
-height: 100%;
-width: 50%;
-text-align: center;
-transform: translateX(0);
-transition: transform 0.6s ease-in-out;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 40px;
+  height: 100%;
+  width: 50%;
+  text-align: center;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
 }
-.overlay-right{
-  right:0;
+
+.overlay-right {
+  right: 0;
   transform: translateX(0);
 }
-.overlay-left{
+
+.overlay-left {
   transform: translateX(-20%);
 }
 
 /* Animate */
 
 /* Sign in Active */
-.container.right-panel-active .sign-in-container{
+.container.right-panel-active .sign-in-container {
+  transition: transform 1s ease, opacity .9s ease-out;
   transform: translateX(100%);
+  opacity: 0;
 }
 
 /* Sign up Active */
-.container.right-panel-active .sign-up-container{
+.container.right-panel-active .sign-up-container {
+  transition: transform 1s ease, opacity 0.9s ease-in;
   transform: translateX(100%);
   opacity: 1;
   z-index: 5;
 }
 
 /* Overlay-signup to left */
-.container.right-panel-active .overlay-container{
+.container.right-panel-active .overlay-container {
   transform: translateX(-100%);
 }
 
 /* Overlay */
-.container.right-panel-active .overlay{
+.container.right-panel-active .overlay {
   transform: translateX(50%);
 }
 
-.container.right-panel-active .overlay-left{
+.container.right-panel-active .overlay-left {
   transform: translateX(0);
 }
-.container.right-panel-active .overlay-right{
+
+.container.right-panel-active .overlay-right {
   transform: translateX(20%);
 }
 
 .login {
+  max-width: 200px;
+  padding-inline: 12px;
+  border-radius: 15px;
+  border: none;
+  text-transform: uppercase;
+  background-color: #f02d34;
+  color: #fff;
+  cursor: pointer;
+}
+
+.order-btn {
   color: gray;
   background: none;
   border: none;
-  position: relative;
   cursor: pointer;
 }
-.container-100{
+
+.container-100 {
   height: 700px;
   display: flex;
   justify-content: center;
@@ -232,7 +267,7 @@ transition: transform 0.6s ease-in-out;
   min-height: 400px;
   background-color: rgb(235, 235, 235);
   max-width: 100%;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
 
@@ -244,15 +279,16 @@ transition: transform 0.6s ease-in-out;
   top: 0;
   height: 100%;
   transition: all 0.6s ease-in-out;
-  
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.form-container form{
+.form-container form {
   width: 400px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -260,11 +296,20 @@ transition: transform 0.6s ease-in-out;
   background-color: none;
   gap: 1rem;
   background-color: rgb(235, 235, 235);
+
 }
 
 .inputBox {
   position: relative;
+  display: flex;
+  flex-direction: column;
 
+}
+
+.inputBox p {
+  position: relative;
+  height: 0px;
+  width: 0px;
 }
 
 .inputBox input {
@@ -275,7 +320,7 @@ transition: transform 0.6s ease-in-out;
   color: rgb(99, 99, 99);
   border: 1px solid gray;
   background-color: transparent;
-  width: 100%;
+
 }
 
 .inputBox span {
@@ -285,7 +330,6 @@ transition: transform 0.6s ease-in-out;
   color: rgb(99, 99, 99);
   pointer-events: none;
   text-transform: uppercase;
- 
   transition: 0.5s;
   font-size: 0.8em;
 }
@@ -299,7 +343,14 @@ transition: transform 0.6s ease-in-out;
   background: rgb(235, 235, 235);
 }
 
+.password {
+  margin-top: 0.5rem;
+}
 
+.password-check {
+  margin: 0;
+  transform: translateX(180px) translateY(-38px);
+}
 
 .login-btn {
   width: 100%;
@@ -314,6 +365,11 @@ transition: transform 0.6s ease-in-out;
   cursor: pointer;
   transform: scale(1, 1);
   transition: transform 0.5s ease;
+}
+
+.login-btn:disabled {
+  background-color: rgba(128, 128, 128, 0.562);
+  cursor: default;
 }
 
 button.ghost {
@@ -353,6 +409,7 @@ button.ghost:hover {
   transition: transform .4s ease;
   border: none;
   background-color: transparent;
+  display: flex;
 }
 
 .cart-icon:hover {
@@ -362,6 +419,7 @@ button.ghost:hover {
 .cart-item-qty {
   position: absolute;
   right: -8px;
+  top: -5px;
   font-size: 12px;
   color: #eee;
   background-color: #f02d34;
@@ -412,11 +470,11 @@ button.ghost:hover {
 }
 
 .hero-banner-container {
-  padding: 100px 40px;
+  padding: 50px 40px;
   background-color: #dcdcdc;
   border-radius: 15px;
   position: relative;
-  height: 500px;
+  height: 100%;
   line-height: 0.9;
   width: 100%;
 
@@ -432,7 +490,7 @@ button.ghost:hover {
   background-color: #f02d34;
   color: white;
   border: none;
-  margin-top: 40px;
+
   font-size: 18px;
   font-weight: 500;
   cursor: pointer;
@@ -447,6 +505,8 @@ button.ghost:hover {
 .hero-banner-container h1 {
   color: white;
   font-size: 10em;
+  font-weight: 700;
+  margin-top: -30px;
   margin-left: -20px;
   text-transform: uppercase;
 }
@@ -454,28 +514,22 @@ button.ghost:hover {
 .hero-banner-image {
   position: absolute;
   top: 0%;
-  right: 20%;
+  right: 5%;
   width: 450px;
   height: 450px;
 }
 
 
 .desc {
-  position: absolute;
-  right: 10%;
-  bottom: 5%;
   width: 300px;
   line-height: 1.3;
-  display: flex;
-  flex-direction: column;
   color: #324d67;
-
 }
 
 .desc p {
   color: #5f5f5f;
   font-weight: 100;
-  text-align: end;
+
 }
 
 .desc h5 {
@@ -1154,5 +1208,99 @@ button.ghost:hover {
   .btn-container {
     width: 300px;
     margin: auto;
+  }
+}
+
+@media screen and (max-width:600px) {
+  .hero-banner-container {
+    height: 450px;
+  }
+
+  .hero-banner-image {
+    width: 100%;
+    height: 90%;
+    top: -2%;
+    right: -6%;
+  }
+
+  .footer-banner-container {
+    height: 560px;
+    margin-top: 80px;
+  }
+
+  .footer-banner-image {
+    width: 77%;
+    left: 30%;
+    top: 6%;
+    height: 56%
+  }
+
+  .banner-desc .left h3 {
+    font-weight: 900;
+    font-size: 50px;
+    margin-left: 5px;
+  }
+
+  .banner-desc .left p {
+    margin: 18px;
+  }
+
+  .banner-desc .right h3 {
+    font-size: 45px;
+  }
+
+  .banner-desc .right p {
+    font-size: 18px;
+  }
+
+  .banner-desc .right .company-desc {
+    font-size: 14px;
+  }
+
+  .banner-desc {
+    flex-wrap: wrap;
+
+  }
+
+  .hero-banner-container {
+    line-height: 0.5;
+  }
+
+  .hero-banner-container h1 {
+    font-size: 100px;
+  }
+
+  .hero-banner-container h3 {
+    font-size: 40px;
+  }
+
+  .hero-banner-container button {
+    margin-top: 20px;
+    z-index: 10000;
+  }
+
+  .desc {
+    position: absolute;
+    left: 8%;
+    bottom: 17%;
+    width: 300px;
+    line-height: 1.3;
+    display: flex;
+    flex-direction: column;
+    color: #324d67;
+  }
+
+  .desc p {
+    color: #5f5f5f;
+    font-weight: 100;
+    text-align: start;
+  }
+
+  .desc h5 {
+    margin-bottom: 12px;
+    font-weight: 700;
+    font-size: 16px;
+    /* color: black; */
+    align-self: flex-end;
   }
 }

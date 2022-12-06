@@ -3,17 +3,18 @@ import { client, urlFor } from '../../../client';
 import { useParams } from 'react-router-dom';
 import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import Product from '../../Product';
-import {toast} from 'react-hot-toast'
-import { useSelector, useDispatch } from "react-redux";
-import {addToCart, setQty} from '../../../redux/cartSlice'
-import { setShowCart } from '../../../redux/reducers';
-
+import { toast } from 'react-hot-toast';
+import { useSelector, useDispatch } from 'react-redux';
+import { addToCart, setQty } from '../../../redux/cartReducer';
+import { setShowCart } from '../../../redux/productReducer';
+import { db } from '../../../firebase';
 const ProductDetails = () => {
   const [details, setDetails] = useState([]);
   const [index, setIndex] = useState(0);
   const dispatch = useDispatch();
   const { slug } = useParams();
   const { product } = useSelector((state) => state.product);
+  const { user } = useSelector((state) => state.cart);
   const qty = useSelector((state) => state.cart.qty);
 
   useEffect(() => {
@@ -25,28 +26,28 @@ const ProductDetails = () => {
       .catch(console.error);
   }, [slug]);
 
-const handleAddtoCart = (product,qty) => {
-  dispatch(addToCart(product,qty))
-  toast.success(`${qty} ${product.name} added to the cart.`)
-}
+  const handleAddtoCart = (product, qty) => {
+    dispatch(addToCart(product, qty));
 
-const handleDecrement = (type) => {
-  if(qty - 1 < 1) return 1
-  else { dispatch(setQty({type: "DECREMENT"}))}
-}
-const buyNow = (product,qty) => {
-  dispatch(addToCart(product,qty))
-  dispatch(setShowCart(true))
-}
+    toast.success(`${qty} ${product.name} added to the cart.`);
+  };
 
-
-
+  const handleDecrement = (type) => {
+    if (qty - 1 < 1) return 1;
+    else {
+      dispatch(setQty({ type: 'DECREMENT' }));
+    }
+  };
+  const buyNow = (product, qty) => {
+    dispatch(addToCart(product, qty));
+    dispatch(setShowCart(true));
+  };
 
   return (
     <div>
       <div className="product-detail-container">
         <div>
-          <div className="image-container">{details.image && <img src={urlFor(details.image[index])} className="product-detail-image" alt='' />}</div>
+          <div className="image-container">{details.image && <img src={urlFor(details.image[index])} className="product-detail-image" alt="" />}</div>
           <div className="small-images-container">
             {details.image &&
               details.image?.map((item, i) => (
@@ -78,22 +79,20 @@ const buyNow = (product,qty) => {
           <div className="quantity">
             <h3>Quantity</h3>
             <p className="quantity-desc">
-              <span className="minus" onClick={()=>handleDecrement()}>
+              <span className="minus" onClick={() => handleDecrement()}>
                 <AiOutlineMinus />
               </span>
-              <span className="num">
-                {qty}
-              </span>
-              <span className="plus" onClick={()=>dispatch(setQty({type: "INCREMENT"}))}>
+              <span className="num">{qty}</span>
+              <span className="plus" onClick={() => dispatch(setQty({ type: 'INCREMENT' }))}>
                 <AiOutlinePlus />
               </span>
             </p>
           </div>
           <div className="buttons">
-            <button type="button" className="add-to-cart" onClick={()=>handleAddtoCart(details,qty)}>
+            <button type="button" className="add-to-cart" onClick={() => handleAddtoCart(details, qty)}>
               Add to Cart
             </button>
-            <button type="button" className="buy-now" onClick={()=>buyNow(details,qty)}>
+            <button type="button" className="buy-now" onClick={() => buyNow(details, qty)}>
               Buy Now
             </button>
           </div>

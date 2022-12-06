@@ -1,21 +1,26 @@
 import React from 'react';
 import Layout from './components/Layout/Layout';
 import Home from './components/pages/Home';
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate, Outlet } from 'react-router-dom'
 import ProductDetails from './components/pages/product/[slug]';
 
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { setProduct, setUser } from './redux/reducers';
+import { setProduct } from './redux/productReducer';
+import { setUser, setCartItems } from './redux/cartReducer';
 import { client } from './client';
 import { Toaster } from 'react-hot-toast';
 import Success from './components/pages/Success';
 import Login from './components/Login';
-import { auth } from './firebase';
+import { auth, db } from './firebase';
+import Orders from './components/Orders';
+
+
 
 function App() {
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.product);
+  const { user } = useSelector((state) => state.cart);
+
 
   useEffect(() => {
     client
@@ -28,19 +33,41 @@ function App() {
 
   useEffect(() => {
     auth.onAuthStateChanged(authUser => {
-      console.log('THE USER IS', authUser);
-
       if (authUser) {
-        dispatch(setUser(authUser))
+        const thist = {
+          'email': authUser.email,
+          'uid': authUser.uid,
+          'name': authUser.displayName
+        };
+        dispatch(setUser(thist))
+
       } else {
         dispatch(setUser(null))
       }
-      console.log(user);
-    
+
     })
 
-     //eslint-disable-next-line
+    //eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    db
+      .collection('users')
+      .doc(user?.uid)
+      .collection('cart')
+      .onSnapshot(snapshot => {
+        dispatch(setCartItems(snapshot.docs.map(doc => ({
+          id: doc.id,
+          data: doc.data()
+        }))))
+      })
+
+    //eslint-disable-next-line
+  }, [user]);
+
+  const ProtectedRoute = ({ user }) => {
+    return user ? <Outlet /> : <Navigate to="/" />
+  };
 
   return (
 
@@ -48,9 +75,14 @@ function App() {
       <Toaster />
       <Routes>
         <Route path="/" exact element={<Home />} />
-        <Route path="/login" exact element={<Login />} />
+        <Route path="/login" exact element={user ? <Navigate to='/' /> : <Login />} />
         <Route path={`/product/:slug`} element={<ProductDetails />} />
         <Route path={`/success`} element={<Success />} />
+
+        <Route element={<ProtectedRoute user={user} />}>
+          
+          <Route path="/orders" exact element={<Orders />} />
+        </Route>
 
       </Routes>
     </Layout>

@@ -1,27 +1,39 @@
 import React, { useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { AiOutlineMinus, AiOutlinePlus, AiOutlineLeft, AiOutlineShopping } from 'react-icons/ai'
 import { TiDeleteOutline } from 'react-icons/ti'
 import { toast } from 'react-hot-toast'
 import { urlFor } from '../client'
 import { useSelector, useDispatch } from "react-redux";
-import { setShowCart } from '../redux/reducers';
-import { cartQty, removeFromCart } from '../redux/cartSlice'
-import { loadStripe } from '@stripe/stripe-js';
+import { setShowCart } from '../redux/productReducer';
+import { cartQty, removeFromCart } from '../redux/cartReducer'
 import axios from 'axios'
+import { db } from '../firebase'
 
+import { EnableSuccessURL } from '../redux/successReducer'
 const Cart = () => {
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const cartRef = useRef();
   const { cartItems, cartTotalQuantity, cartTotalPrice } = useSelector((state) => state.cart)
+  const { user, stripeData } = useSelector((state) => state.cart);
 
-  const stripePromise = loadStripe(process.env.PUBLIC_STRIPE_PUBLISHABLE_KEY);
-
+  const stripeJs = async () => await import("@stripe/stripe-js");
 
   const handleDecrement = (quantity) => {
     if (cartItems.cartQuantity - 1 < 1) return 1
     else { dispatch(cartQty({ type: "DECREMENT", item: quantity })) }
+  }
+
+  const handleRemove = (item) => {
+    console.log(item);
+    dispatch(removeFromCart(item))
+    db
+      .collection('users')
+      .doc(user?.uid)
+      .collection('cart')
+      .doc(item._id).delete()
+
   }
 
   const api = axios.create({
@@ -30,28 +42,39 @@ const Cart = () => {
   });
 
   const handleCheckout = async () => {
-
+    const { loadStripe } = await stripeJs();
+    const stripePromise = loadStripe(process.env.REACT_APP_PUBLIC_STRIPE_PUBLISHABLE_KEY);
     const stripe = await stripePromise;
     const body = {
       cartItems: cartItems
-  }
+    }
     const response = await api.post('/create-checkout-session', body)
-  //  const response = await fetch('http://localhost:4242/create-checkout-session', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: {
-  //       cartItems: cartItems
-  //     },
-  //   });
 
-  
-  if (response.statusCode === 500) return;
-    toast.loading('Redirecting..')
- 
     const data = await response.data;
-stripe.redirectToCheckout({sessionId: data.id})
+
+    if (response.statusCode === 500) return;
+    toast.loading('Redirecting..')
+
+    db
+      .collection('users')
+      .doc(user?.uid)
+      .collection('orders')
+      .doc(data.id)
+      .set({
+        cart: cartItems,
+        amount: data.amount_total,
+        created: data.created
+      })
+
+    dispatch(EnableSuccessURL(true));
+   
+    stripe.redirectToCheckout({ sessionId: data.id })
+  }
+  console.log('this is StripeData',stripeData);
+
+  const handleLoginCheckout = () => {
+    dispatch(setShowCart(false))
+    navigate('/login')
   }
   return (
     <div className='cart-wrapper' ref={cartRef}>
@@ -97,7 +120,7 @@ stripe.redirectToCheckout({sessionId: data.id})
                       </span>
                     </p>
                   </div>
-                  <button type='button' className='remove-item' onClick={() => dispatch(removeFromCart(item))}>
+                  <button type='button' className='remove-item' onClick={() => handleRemove(item)}>
                     <TiDeleteOutline />
                   </button>
                 </div>
@@ -112,10 +135,12 @@ stripe.redirectToCheckout({sessionId: data.id})
               <h3>P{cartTotalPrice}</h3>
             </div>
             <div className='btn-container'>
-
-              <button type='button' className='btn' onClick={handleCheckout}>
-                Pay
+              {/* <Link to={!user && '/login'}> */}
+              <button type='button' className='btn' onClick={user ? handleCheckout : handleLoginCheckout}>
+                {user ? 'PAY' : 'LOGIN TO PAY'}
               </button>
+              {/* </Link> */}
+
 
             </div>
           </div>
