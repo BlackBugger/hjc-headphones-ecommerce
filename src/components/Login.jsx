@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-useless-escape */
 import React, { useEffect, useState } from 'react';
 import { FaFacebookF, FaGooglePlusG, FaCheckCircle, FaRegTimesCircle } from 'react-icons/fa';
