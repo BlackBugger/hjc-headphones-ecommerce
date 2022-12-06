@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AiOutlineShopping } from 'react-icons/ai'
 import Cart from './Cart';
@@ -8,6 +8,25 @@ import { auth } from '../firebase';
 import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
+  const [showNav, setshowNav] = useState('close');
+  const navRef = useRef();
+
+  const showNavbar = () => {
+
+    if (showNav === 'open') {
+      navRef.current.classList.remove("active_nav")
+      setshowNav('close')
+    } else {
+      navRef.current.classList.add("active_nav");
+      setshowNav('open')
+    }
+
+  }
+
+
+
+
+
   const { cartTotalQuantity } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const { showCart } = useSelector((state) => state.product);
@@ -26,7 +45,7 @@ const Navbar = () => {
         <p className='logo'>
           <Link to="/">HJC Headphones</Link>
         </p>
-        <div className='actions'>
+        <div className='actions' ref={navRef}>
           <span>Hello, {!user ? 'Guest' : (user.name || user.email)}</span>
           <Link to={!user && '/login'}>
             <button type='button' className='login' onClick={handleAuth}>{user ? 'SIGN OUT' : 'LOGIN'}</button>
@@ -36,8 +55,9 @@ const Navbar = () => {
             <AiOutlineShopping />
             <span className='cart-item-qty'>{cartTotalQuantity}</span>
           </button>
-        </div>
 
+        </div>
+        <span className="nav-icon" onClick={showNavbar}>&#9776;</span>
         {showCart && <Cart />}</div>
 
     </div>

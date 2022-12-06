@@ -52,8 +52,7 @@ a {
 justify-content: center;
 min-width: 100%;
 z-index: 100;
-
-background-color: #232627;
+background-color: #313435;
 box-shadow: 1px 5px 20px 3px rgb(0 0 0 / 30%);
 }
 .main-nav{
@@ -148,6 +147,7 @@ span.text-red {
   color: gray;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 }
 
 
@@ -595,6 +595,8 @@ button.ghost:hover {
 .banner-desc {
   display: flex;
   justify-content: space-between;
+  height: 100%;
+  margin-top: -60px;
 }
 
 .banner-desc button {
@@ -621,10 +623,8 @@ button.ghost:hover {
 
 .footer-banner-image {
   position: absolute;
-  /* top: -35%;
-  left: 8%; */
   top: -25%;
-  left: 25%;
+  left: 30%;
 }
 
 .banner-desc .right {
@@ -1055,6 +1055,12 @@ color: white;
   margin-top: 10px;
 }
 
+.nav-icon{
+  display: none;
+  color: white;
+ margin-top: 0.2em;
+}
+
 @media screen and (max-width:800px) {
   .hero-banner-container {
     height: 560px;
@@ -1237,6 +1243,66 @@ color: white;
 }
 
 @media screen and (max-width:600px) {
+
+  .nav-icon{
+    display: block;
+  }
+
+  .actions{
+    position:fixed;
+    right: -10rem; 
+    /* -10rem */
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+
+padding: 1rem 2rem 2rem 1rem;
+transition: 1s;
+border-radius: 0 0 0 8rem;
+
+  }
+
+  .active_nav{
+    display: block;
+    position:fixed;
+    right: 1rem; 
+    /* -10rem */
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+background-color: #313435;
+padding: 2rem 2rem 2rem 1rem;
+
+border-radius: 0 0 0 8rem;
+
+  }
+
+  /* .navbar-container {
+    position: fixed;
+    height: 40px;
+    top:1rem;
+    left: 0;
+    display: flex;
+  justify-content: center;
+  min-width: 100%;
+  z-index: 100;
+  background-color: #232627;
+  box-shadow: 1px 5px 20px 3px rgb(0 0 0 / 30%);
+  }
+  .main-nav{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6px;
+    padding-inline: 100px;
+  min-width: 100%;
+  text-align: center;
+    padding: 0 50px;
+  } */
+  
   .hero-banner-container {
     height: 450px;
   }
