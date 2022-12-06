@@ -76,8 +76,8 @@ function App() {
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/login" exact element={user ? <Navigate to='/' /> : <Login />} />
-        <Route path={`/product/:slug`} element={<ProductDetails />} />
-        <Route path={`/success`} element={<Success />} />
+        <Route path={`/product/:slug`} exact element={<ProductDetails />} />
+        <Route path={`/success`} exact element={<Success />} />
 
         <Route element={<ProtectedRoute user={user} />}>
           
