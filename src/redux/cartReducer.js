@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable react-hooks/rules-of-hooks */
 import { createSlice } from '@reduxjs/toolkit';
 import { db } from '../firebase';
@@ -104,10 +105,6 @@ export const cartSlice = createSlice({
       });
       state.cartTotalQuantity = totalQuantity.reduce((a, b) => a + b, 0);
       state.cartTotalPrice = totalPrice.reduce((a, b) => a + b, 0);
-
-      // const newItem = action.payload;
-      // const user = state.user;
-      // const itemIndex = state.cartItems.findIndex((item) => item._id === newItem._id);
     },
     setCartTotalPrice: (state, action) => {
       state.cartTotalPrice = action.payload;

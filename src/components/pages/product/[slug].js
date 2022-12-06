@@ -7,14 +7,12 @@ import { toast } from 'react-hot-toast';
 import { useSelector, useDispatch } from 'react-redux';
 import { addToCart, setQty } from '../../../redux/cartReducer';
 import { setShowCart } from '../../../redux/productReducer';
-import { db } from '../../../firebase';
 const ProductDetails = () => {
   const [details, setDetails] = useState([]);
   const [index, setIndex] = useState(0);
   const dispatch = useDispatch();
   const { slug } = useParams();
   const { product } = useSelector((state) => state.product);
-  const { user } = useSelector((state) => state.cart);
   const qty = useSelector((state) => state.cart.qty);
 
   useEffect(() => {
