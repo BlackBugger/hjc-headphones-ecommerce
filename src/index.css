@@ -218,7 +218,7 @@ span.text-red {
 /* Sign in Active */
 .container.right-panel-active .sign-in-container {
   transition: transform 1s ease, opacity .9s ease-out;
-  transform: translateX(100%);
+  transform: translateY(100%);
   opacity: 0;
 }
 
@@ -269,10 +269,11 @@ span.text-red {
 }
 
 .container-100 {
-  height: 700px;
+  height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  
 
 }
 
@@ -284,6 +285,7 @@ span.text-red {
   overflow: hidden;
   position: relative;
   width: 768px;
+  
   min-height: 400px;
   background-color: rgb(235, 235, 235);
   max-width: 100%;
@@ -291,7 +293,6 @@ span.text-red {
 }
 
 
-.login-desc {}
 
 
 .form-container {
@@ -316,7 +317,6 @@ span.text-red {
   background-color: none;
   gap: 1rem;
   background-color: rgb(235, 235, 235);
-
 }
 
 .inputBox {
@@ -416,8 +416,8 @@ button.ghost:hover {
 
 .clr-btn {
   border: none;
-  border-bottom: 1px solid black;
   background: none;
+  text-decoration: underline;
 }
 
 
@@ -1061,7 +1061,53 @@ color: white;
  margin-top: 0.2em;
 }
 
+.containerz{
+  display: none;
+}
+
 @media screen and (max-width:800px) {
+  
+  .container {
+    height: 80vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .containerz {
+    display: flex;
+  }
+  .containerz form {
+    width: 400px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: none;
+    gap: 1rem;
+    color: gray;
+  }
+
+  .inputBox input:valid~span,
+.inputBox input:focus~span {
+  color: rgb(99, 99, 99);
+  transform: translateX(10px) translateY(-7px);
+  font-size: 0.65em;
+  padding: 0 10px;
+  background: #151718;
+}
+
+.clr-btn {
+ 
+  color: gray;
+  text-decoration: underline;
+}
+  .containerz form>h2{
+    color:#d4282d;
+  }
+
+  
   .hero-banner-container {
     height: 560px;
   }

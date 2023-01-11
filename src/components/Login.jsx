@@ -217,6 +217,38 @@ const Login = () => {
           </div>
         </div>
       </div>
+
+      <div className='containerz'>
+
+        <form>
+          <h2>Sign In</h2>
+          <p className="iconss">
+            <FaFacebookF className="icons" onClick={signInWithFacebook} />
+            <FaGooglePlusG className="icons" onClick={signInWithGoogle} />
+          </p>
+          <span>or login with</span>
+          <div className="inputBox">
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+            <span>email</span>
+          </div>
+          <div className="inputBox">
+            <input type="password" value={signInPassword} onChange={(e) => setSignInPassword(e.target.value)} required />
+            <span>password</span>
+          </div>
+
+          <button type="submit" disabled={disable} onClick={signIn} className="login-btn">
+            LOGIN
+          </button>
+          <button type="button" onClick={() => dispatch(setShowForgotPassword(true))} className="clr-btn">
+            forgot password?
+          </button>
+        </form>
+      </div>
+      <FPModal
+        show={showForgotPassword}
+        onHide={() => dispatch(setShowForgotPassword(false))}
+      />
+
     </div>
   );
 };
