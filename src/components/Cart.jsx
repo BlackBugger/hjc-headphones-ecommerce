@@ -55,16 +55,6 @@ const Cart = () => {
     if (response.statusCode === 500) return;
     toast.loading('Redirecting..')
 
-    // db
-    //   .collection('users')
-    //   .doc(user?.uid)
-    //   .collection('orders')
-    //   .doc(data.id)
-    //   .set({
-    //     cart: cartItems,
-    //     amount: data.amount_total,
-    //     created: data.created
-    //   })
 
     dispatch(EnableSuccessURL(true));
    
